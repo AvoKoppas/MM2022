@@ -4,18 +4,22 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <changeSet id="2020-05-03 ennustus tabel" author="Avo Koppas">
-        <createTable tableName="ennustused">
+    <changeSet id="2020-05-03 Game" author="Veiko Ilves">
+        <createTable tableName="football_games">
             <column name="id" type="int" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="kasutajanimi" type="text"/>
-            <column name="mängu_nr" type="int"/>
-            <column name="kodu" type="text"/>
-            <column name="viik" type="text"/>
-            <column name="võõrsil" type="text"/>
-            <column name="täpne_skoor" type="text"/>
-            <column name="punktid" type="int"/>
+            <column name="game_nr" type="int"/>
+            <column name="home" type="int"/>
+            <column name="away" type="int"/>
+            <column name="result" type="text"/>
+        </createTable>
+        <createTable tableName="prediction">
+            <column name="id" type="int" autoIncrement="true">
+            </column>
+            <column name="game_id" type="int"/>
+            <column name="home" type="int"/>
+            <column name="away" type="int"/>
         </createTable>
     </changeSet>
 
