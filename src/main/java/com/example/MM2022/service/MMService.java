@@ -1,13 +1,19 @@
-package Controller;
+package com.example.MM2022.service;
 
-public class MMController {
-    public static void main(String[] args) {
-        System.out.println(calculate(2, 2, 2, 2));
-    }
-    // Game nr 1  int resultA = 1, int resultB = 1  Mari123 int quessA = 2, int quessB = 3
+import com.example.MM2022.repository.MMRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Service;
 
+@Service
+public class MMService {
+    @Autowired
+    private MMRepository mmRepository;
+    @Autowired
+    private NamedParameterJdbcTemplate jdbcTemplate;
 
-    public static int calculate(int resultA, int resultB, int quessA, int quessB) {
+    public void calculate(int resultA, int resultB,
+                          int quessA, int quessB) {
         int points = 0;
         if (resultA == quessA && resultB == quessB) {       //kui on täpne skoor
             System.out.println("BINGO! Täpne skoor");
@@ -20,6 +26,5 @@ public class MMController {
             points = points + 1;
         } else {
         }
-        return points;
     }
 }
