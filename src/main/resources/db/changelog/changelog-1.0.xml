@@ -4,5 +4,19 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
+    <changeSet id="2020-05-03 ennustus tabel" author="Avo Koppas">
+        <createTable tableName="ennustused">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="kasutajanimi" type="text"/>
+            <column name="mängu_nr" type="int"/>
+            <column name="kodu" type="text"/>
+            <column name="viik" type="text"/>
+            <column name="võõrsil" type="text"/>
+            <column name="täpne_skoor" type="text"/>
+            <column name="punktid" type="int"/>
+        </createTable>
+    </changeSet>
 
 </databaseChangeLog>
