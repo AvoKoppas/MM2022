@@ -16,16 +16,25 @@ public class MMController {
     @Autowired
     MMService mmService;
 
-    @GetMapping
-    public int calculate(int resultA, int resultB, int quessA, int quessB) {
-        return -1;
+
+    @GetMapping("calculateScore/")
+    public void calculateScore(int resultHome, int resultAway,
+                               int predictionHome, int predictionAway) {
+        mmService.calculate(resultHome, resultAway, predictionHome,predictionAway);
     }
-//http://localhost:8080/insert/Mari/1/2/3
+
+    //http://localhost:8080/insert/Mari/1/2/3
     @PostMapping("insert/{userName}/{gameId}/{predictionA}/{predictionB}")
     public void insert(@PathVariable("userName") String userName,
-                    @PathVariable("gameId") int gameId,
-                    @PathVariable("predictionA") int predictionA,
-                    @PathVariable("predictionB") int predictionB){
+                       @PathVariable("gameId") int gameId,
+                       @PathVariable("predictionA") int predictionA,
+                       @PathVariable("predictionB") int predictionB) {
         mmService.insertPrediction(userName, gameId, predictionA, predictionB);
     }
+
+//    @PostMapping("")
+//    public int(){
+//
+//    }
+
 }

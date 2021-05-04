@@ -23,4 +23,25 @@ public class MMRepository {
         jdbcTemplate.update(sql, paramMap);
 
     }
+
+    public void calculateScore() {
+
+    }
+
+    public int getPrediction(String userName, int gameId) {
+        String sql = "SELECT home, away FROM prediction " +
+                "WHERE user_name=:muutuja1, game_id = :gameId";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("userName", userName);
+        paramMap.put("gameId", gameId);
+        return jdbcTemplate.queryForObject(sql, paramMap, int.class);
+    }
+
+    public int getResultHome(String gameId) {
+        String sql = "SELECT home FROM football_games " +
+                "WHERE game_id = :gameId";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("gameId", gameId);
+        return jdbcTemplate.queryForObject(sql, paramMap, int.class);
+    }
 }

@@ -12,22 +12,28 @@ public class MMService {
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
-    public void calculate(int resultA, int resultB,
-                          int quessA, int quessB) {
+    public void calculate(int resultHome, int resultAway,
+                          int predictionHome, int predictionAway) {
         int points = 0;
-        if (resultA == quessA && resultB == quessB) {       //kui on täpne skoor
+        if (resultHome == predictionHome && resultAway == predictionAway) {       //kui on täpne skoor
             System.out.println("BINGO! Täpne skoor");
             points = points + 2;
-        } else if (resultA > resultB && quessA > quessB) {  //kui kodumeeskond võidab
+        } else if (resultHome > resultAway && predictionHome > predictionAway) {  //kui kodumeeskond võidab
             points = points + 1;
-        } else if (resultA < resultB && quessA < quessB) {  //kui võõrsilmeeskond võidab
+        } else if (resultHome < resultAway && predictionHome < predictionAway) {  //kui võõrsilmeeskond võidab
             points = points + 1;
-        } else if (resultA - resultB == quessA - quessB) {  //kui on viik
+        } else if (resultHome - resultAway == predictionHome - predictionAway) {  //kui on viik
             points = points + 1;
-        } else {
         }
+        mmRepository.calculateScore();
     }
+
     public void insertPrediction(String userName, int gameId, int predictionA, int predictionB) {
         mmRepository.insertPrediction(userName, gameId, predictionA, predictionB);
     }
+
+    public void getPrediction(String userName, int gameId) {
+        mmRepository.getPrediction(userName, gameId);
+    }
+
 }
