@@ -18,10 +18,10 @@ public class MMController {
 
 
     @GetMapping("calculateScore/")
-    public void calculateScore(int resultHome, int resultAway,
-                               int predictionHome, int predictionAway) {
-        mmService.calculate(resultHome, resultAway, predictionHome,predictionAway);
-    }
+//    public void calculateScore(int resultHome, int resultAway,
+//                               int predictionHome, int predictionAway) {
+//        mmService.calculate(resultHome, resultAway, predictionHome,predictionAway);
+//    }
 
     //http://localhost:8080/insert/Mari/1/2/3
     @PostMapping("insert/{userName}/{gameId}/{predictionA}/{predictionB}")

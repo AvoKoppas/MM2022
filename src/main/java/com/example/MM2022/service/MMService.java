@@ -12,21 +12,24 @@ public class MMService {
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
-    public void calculate(int resultHome, int resultAway,
-                          int predictionHome, int predictionAway) {
-        int points = 0;
-        if (resultHome == predictionHome && resultAway == predictionAway) {       //kui on täpne skoor
-            System.out.println("BINGO! Täpne skoor");
-            points = points + 2;
-        } else if (resultHome > resultAway && predictionHome > predictionAway) {  //kui kodumeeskond võidab
-            points = points + 1;
-        } else if (resultHome < resultAway && predictionHome < predictionAway) {  //kui võõrsilmeeskond võidab
-            points = points + 1;
-        } else if (resultHome - resultAway == predictionHome - predictionAway) {  //kui on viik
-            points = points + 1;
-        }
-        mmRepository.calculateScore();
-    }
+//    public void calculate(
+////            int resultHome, int resultAway,
+////                          int predictionHome, int predictionAway
+//    ) {
+//        int resultHome=mmRepository.getResultHome(String gameId);
+//        int points = 0;
+//        if (mmRepository.getResultHome() == predictionHome && resultAway == predictionAway) {       //kui on täpne skoor
+//            System.out.println("BINGO! Täpne skoor");
+//            points = points + 2;
+//        } else if (resultHome > resultAway && predictionHome > predictionAway) {  //kui kodumeeskond võidab
+//            points = points + 1;
+//        } else if (resultHome < resultAway && predictionHome < predictionAway) {  //kui võõrsilmeeskond võidab
+//            points = points + 1;
+//        } else if (resultHome - resultAway == predictionHome - predictionAway) {  //kui on viik
+//            points = points + 1;
+//        }
+//        mmRepository.calculateScore();
+//    }
 
     public void insertPrediction(String userName, int gameId, int predictionA, int predictionB) {
         mmRepository.insertPrediction(userName, gameId, predictionA, predictionB);
