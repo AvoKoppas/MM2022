@@ -16,8 +16,12 @@
         </createTable>
         <createTable tableName="prediction">
             <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
             </column>
-            <column name="game_id" type="int"/>
+            <column name="user_name" type="text"/>
+            <column name="game_id" type="int">
+                <constraints foreignKeyName="fk_prediction_football_games" references="football_games(id)"/>
+            </column>
             <column name="home" type="int"/>
             <column name="away" type="int"/>
         </createTable>

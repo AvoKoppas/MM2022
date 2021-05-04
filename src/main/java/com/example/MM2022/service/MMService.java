@@ -27,4 +27,7 @@ public class MMService {
         } else {
         }
     }
+    public void insertPrediction(String userName, int gameId, int predictionA, int predictionB) {
+        mmRepository.insertPrediction(userName, gameId, predictionA, predictionB);
+    }
 }

@@ -12,7 +12,7 @@ public class MMRepository {
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
-    public int insertPrediction(String userName, int gameId, int predictionA, int predictionB) {
+    public void insertPrediction(String userName, int gameId, int predictionA, int predictionB) {
         String sql = "INSERT INTO prediction (user_name, game_id, home, away) " +
                 "VALUES (:name, :id, :predA, :predB)";
         Map<String, Object> paramMap = new HashMap<>();
@@ -20,7 +20,7 @@ public class MMRepository {
         paramMap.put("id", gameId);
         paramMap.put("predA", predictionA);
         paramMap.put("predB", predictionB);
-        return jdbcTemplate.update(sql, paramMap);
+        jdbcTemplate.update(sql, paramMap);
 
     }
 }
