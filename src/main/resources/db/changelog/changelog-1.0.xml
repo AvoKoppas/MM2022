@@ -20,7 +20,7 @@
             </column>
             <column name="user_name" type="text"/>
             <column name="game_id" type="int">
-                <constraints foreignKeyName="fk_prediction_football_games" references="football_games(id)"/>
+                <constraints foreignKeyName="fk_prediction_football_game" references="football_game(id)"/>
             </column>
             <column name="home" type="int"/>
             <column name="away" type="int"/>

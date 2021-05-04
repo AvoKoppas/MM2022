@@ -30,7 +30,7 @@ public class MMService {
     public void insertPrediction(String userName, int gameId, int predictionA, int predictionB) {
         mmRepository.insertPrediction(userName, gameId, predictionA, predictionB);
     }
-    public void insertRealScore(String gameNr, int resultA, int resultB) {
+    public void insertRealScore(int gameNr, int resultA, int resultB) {
         mmRepository.insertRealScore(gameNr, resultA, resultB);
     }
 }
