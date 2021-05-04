@@ -5,7 +5,7 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
     <changeSet id="2020-05-03 Game" author="Veiko Ilves">
-        <createTable tableName="football_games">
+        <createTable tableName="football_game">
             <column name="id" type="int" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
@@ -20,7 +20,7 @@
             </column>
             <column name="user_name" type="text"/>
             <column name="game_id" type="int">
-                <constraints foreignKeyName="fk_prediction_football_games" references="football_games(id)"/>
+                <constraints foreignKeyName="fk_prediction_football_game" references="football_game(id)"/>
             </column>
             <column name="home" type="int"/>
             <column name="away" type="int"/>

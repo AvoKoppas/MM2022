@@ -39,4 +39,7 @@ public class MMService {
         mmRepository.getPrediction(userName, gameId);
     }
 
+    public void insertRealScore(int gameNr, int resultA, int resultB) {
+        mmRepository.insertRealScore(gameNr, resultA, resultB);
+    }
 }
