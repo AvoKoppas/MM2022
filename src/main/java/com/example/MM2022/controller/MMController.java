@@ -28,4 +28,10 @@ public class MMController {
                     @PathVariable("predictionB") int predictionB){
         mmService.insertPrediction(userName, gameId, predictionA, predictionB);
     }
+
+    public void insertScore (@PathVariable("gameNr") String gameNr,
+                             @PathVariable("home") int home,
+                             @PathVariable("away") int away) {
+        mmService.insertRealScore(gameNr, home, away);
+    }
 }

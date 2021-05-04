@@ -23,4 +23,7 @@ public class MMRepository {
         jdbcTemplate.update(sql, paramMap);
 
     }
+    public void insertRealScore(String gameNr, int home, int away) {
+        String sql = "INSERT INTO football_game (
+    }
 }
