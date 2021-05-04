@@ -1,5 +1,6 @@
 package com.example.MM2022.controller;
 
+import com.example.MM2022.repository.GamePrediction;
 import com.example.MM2022.service.MMService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -7,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 public class MMController {
@@ -38,6 +41,12 @@ public class MMController {
                              @PathVariable("resultB") int resultB) {
         mmService.insertRealScore(gameNr, resultA, resultB);
     }
+    /*//http://localhost:8080/showScore/Mari/1
+    @GetMapping("showScore/{userName}/{score}")
+    public List<GamePrediction> showScore(@PathVariable ("userName") String userName,
+                                          @PathVariable("score") int score) {
+        return mmService.showScore(userName, score);*/
+    //}
 
 //    @PostMapping("")
 //    public int(){
