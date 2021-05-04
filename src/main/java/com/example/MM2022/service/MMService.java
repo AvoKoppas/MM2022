@@ -1,9 +1,12 @@
 package com.example.MM2022.service;
 
+import com.example.MM2022.repository.GamePrediction;
 import com.example.MM2022.repository.MMRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class MMService {
@@ -46,4 +49,7 @@ public class MMService {
     public void insertRealScore(int gameNr, int resultA, int resultB) {
         mmRepository.insertRealScore(gameNr, resultA, resultB);
     }
+    /*public List<GamePrediction> showScore(String userName, int score) {
+        return mmRepository.showScore(userName, score);
+    }*/
 }

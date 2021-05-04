@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -102,4 +103,13 @@ public class MMRepository {
         paramMap.put("userName", userName);
         return jdbcTemplate.queryForObject(sql, paramMap, Integer.class);
     }
+    /*public List<GamePrediction> showScore(String userName, int score) {
+            String sql = "SELECT f.id f_id, game_nr, f.home f_home, f.away f_away, result," +
+                    "p.id p_id, user_name, p.home p_home, p.away p_away " +
+                    "FROM football_game f JOIN prediction p ON f.id = p.id";
+            Map<String, Object> paramMap = new HashMap<>();
+            paramMap.put("userName", userName);
+            paramMap.put("score", score);
+            return jdbcTemplate.query(sql, paramMap, new ScoreRowMapper())
+    }*/
 }
