@@ -10,12 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class MMController {
-
     @Autowired
     NamedParameterJdbcTemplate jdbcTemplate;
+
     @Autowired
     MMService mmService;
-
 
     @GetMapping("calculateScore/")
 //    public void calculateScore(int resultHome, int resultAway,
@@ -26,11 +25,12 @@ public class MMController {
     //http://localhost:8080/insert/Mari/1/2/3
     @PostMapping("insert/{userName}/{gameId}/{predictionA}/{predictionB}")
     public void insert(@PathVariable("userName") String userName,
-                    @PathVariable("gameId") int gameId,
-                    @PathVariable("predictionA") int predictionA,
-                    @PathVariable("predictionB") int predictionB){
+                       @PathVariable("gameId") int gameId,
+                       @PathVariable("predictionA") int predictionA,
+                       @PathVariable("predictionB") int predictionB){
         mmService.insertPrediction(userName, gameId, predictionA, predictionB);
     }
+
     //http://localhost:8080/insertScore/1/2/3
     @PostMapping("insertScore/{gameNr}/{resultA}/{resultB}")
     public void insertScore (@PathVariable("gameNr") int gameNr,

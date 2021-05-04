@@ -9,6 +9,15 @@ import java.util.Map;
 
 @Repository
 public class MMRepository {
+//    public int updateScore(){
+//        String sql = "INSERT INTO sv (game_nr, home, away)" +
+//                "VALUES (:number, :resultA, :resultB)";
+//        Map<String, Object> paramMap = new HashMap<>();
+//        paramMap.put("number", gameNr);
+//        paramMap.put("resultA", resultA);
+//        paramMap.put("resultB", resultB);
+//        jdbcTemplate.update(sql, paramMap);
+//    }
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
@@ -24,6 +33,16 @@ public class MMRepository {
 
     }
 
+    public void insertRealScore(int gameNr, int resultA, int resultB) {
+        String sql = "INSERT INTO football_game (game_nr, home, away)" +
+                "VALUES (:number, :resultA, :resultB)";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("number", gameNr);
+        paramMap.put("resultA", resultA);
+        paramMap.put("resultB", resultB);
+        jdbcTemplate.update(sql, paramMap);
+    }
+
     public void calculateScore() {
 
     }
@@ -37,7 +56,7 @@ public class MMRepository {
         return jdbcTemplate.queryForObject(sql, paramMap, int.class);
     }
 
-    public int getResultHome(String gameId) {
+    public int getResultHome(int gameId) {
         String sql = "SELECT home FROM football_game " +
                 "WHERE game_id = :gameId";
         Map<String, Object> paramMap = new HashMap<>();
@@ -45,7 +64,7 @@ public class MMRepository {
         return jdbcTemplate.queryForObject(sql, paramMap, int.class);
     }
 
-    public int getResultAway(String gameId) {
+    public int getResultAway(int gameId) {
         String sql = "SELECT away FROM football_game " +
                 "WHERE game_id = :gameId";
         Map<String, Object> paramMap = new HashMap<>();
@@ -53,7 +72,7 @@ public class MMRepository {
         return jdbcTemplate.queryForObject(sql, paramMap, int.class);
     }
 
-    public int getPredictonHome(String userName, String gameId) {
+    public int getPredictonHome(String userName, int gameId) {
         String sql = "SELECT home FROM prediction " +
                 "WHERE game_id = :gameId, user_name=:userName";
         Map<String, Object> paramMap = new HashMap<>();
@@ -61,22 +80,12 @@ public class MMRepository {
         paramMap.put("userName", userName);
         return jdbcTemplate.queryForObject(sql, paramMap, int.class);
     }
-
-    public int getPredictionAway(String userName, String gameId) {
+    public int getPredictionAway(String userName, int gameId) {
         String sql = "SELECT away FROM prediction " +
                 "WHERE game_id = :gameId, user_name=:userName";
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("gameId", gameId);
         paramMap.put("userName", userName);
         return jdbcTemplate.queryForObject(sql, paramMap, int.class);
-    }
-    public void insertRealScore(int gameNr, int resultA, int resultB) {
-        String sql = "INSERT INTO football_game (game_nr, home, away)" +
-                "VALUES (:number, :resultA, :resultB)";
-        Map<String, Object> paramMap = new HashMap<>();
-        paramMap.put("number", gameNr);
-        paramMap.put("resultA", resultA);
-        paramMap.put("resultB", resultB);
-        jdbcTemplate.update(sql, paramMap);
     }
 }
