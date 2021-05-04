@@ -30,8 +30,8 @@ public class MMController {
     }
 
     public void insertScore (@PathVariable("gameNr") String gameNr,
-                             @PathVariable("home") int home,
-                             @PathVariable("away") int away) {
-        mmService.insertRealScore(gameNr, home, away);
+                             @PathVariable("resultA") int resultA,
+                             @PathVariable("resultB") int resultB) {
+        mmService.insertRealScore(gameNr, resultA, resultB);
     }
 }

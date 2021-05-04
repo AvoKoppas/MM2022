@@ -23,7 +23,13 @@ public class MMRepository {
         jdbcTemplate.update(sql, paramMap);
 
     }
-    public void insertRealScore(String gameNr, int home, int away) {
-        String sql = "INSERT INTO football_game (
+    public void insertRealScore(String gameNr, int resultA, int resultB) {
+        String sql = "INSERT INTO football_games (game_nr, home, away)" +
+                "VALUES (:number, :resultA, :resultB)";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("number", gameNr);
+        paramMap.put("resultA", resultA);
+        paramMap.put("resultB", resultB);
+        jdbcTemplate.update(sql, paramMap);
     }
 }
