@@ -23,6 +23,53 @@ public class MMRepository {
         jdbcTemplate.update(sql, paramMap);
 
     }
+
+    public void calculateScore() {
+
+    }
+
+    public int getPrediction(String userName, int gameId) {
+        String sql = "SELECT home, away FROM prediction " +
+                "WHERE user_name=:muutuja1, game_id = :gameId";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("userName", userName);
+        paramMap.put("gameId", gameId);
+        return jdbcTemplate.queryForObject(sql, paramMap, int.class);
+    }
+
+    public int getResultHome(String gameId) {
+        String sql = "SELECT home FROM football_game " +
+                "WHERE game_id = :gameId";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("gameId", gameId);
+        return jdbcTemplate.queryForObject(sql, paramMap, int.class);
+    }
+
+    public int getResultAway(String gameId) {
+        String sql = "SELECT away FROM football_game " +
+                "WHERE game_id = :gameId";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("gameId", gameId);
+        return jdbcTemplate.queryForObject(sql, paramMap, int.class);
+    }
+
+    public int getPredictonHome(String userName, String gameId) {
+        String sql = "SELECT home FROM prediction " +
+                "WHERE game_id = :gameId, user_name=:userName";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("gameId", gameId);
+        paramMap.put("userName", userName);
+        return jdbcTemplate.queryForObject(sql, paramMap, int.class);
+    }
+
+    public int getPredictionAway(String userName, String gameId) {
+        String sql = "SELECT away FROM prediction " +
+                "WHERE game_id = :gameId, user_name=:userName";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("gameId", gameId);
+        paramMap.put("userName", userName);
+        return jdbcTemplate.queryForObject(sql, paramMap, int.class);
+    }
     public void insertRealScore(int gameNr, int resultA, int resultB) {
         String sql = "INSERT INTO football_game (game_nr, home, away)" +
                 "VALUES (:number, :resultA, :resultB)";

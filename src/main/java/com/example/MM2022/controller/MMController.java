@@ -16,11 +16,14 @@ public class MMController {
     @Autowired
     MMService mmService;
 
-    @GetMapping
-    public int calculate(int resultA, int resultB, int quessA, int quessB) {
-        return -1;
-    }
-//http://localhost:8080/insert/Mari/1/2/3
+
+    @GetMapping("calculateScore/")
+//    public void calculateScore(int resultHome, int resultAway,
+//                               int predictionHome, int predictionAway) {
+//        mmService.calculate(resultHome, resultAway, predictionHome,predictionAway);
+//    }
+
+    //http://localhost:8080/insert/Mari/1/2/3
     @PostMapping("insert/{userName}/{gameId}/{predictionA}/{predictionB}")
     public void insert(@PathVariable("userName") String userName,
                     @PathVariable("gameId") int gameId,
@@ -35,4 +38,10 @@ public class MMController {
                              @PathVariable("resultB") int resultB) {
         mmService.insertRealScore(gameNr, resultA, resultB);
     }
+
+//    @PostMapping("")
+//    public int(){
+//
+//    }
+
 }
