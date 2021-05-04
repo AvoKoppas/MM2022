@@ -28,4 +28,11 @@ public class MMController {
                     @PathVariable("predictionB") int predictionB){
         mmService.insertPrediction(userName, gameId, predictionA, predictionB);
     }
+    //http://localhost:8080/insertScore/1/2/3
+    @PostMapping("insertScore/{gameNr}/{resultA}/{resultB}")
+    public void insertScore (@PathVariable("gameNr") int gameNr,
+                             @PathVariable("resultA") int resultA,
+                             @PathVariable("resultB") int resultB) {
+        mmService.insertRealScore(gameNr, resultA, resultB);
+    }
 }
