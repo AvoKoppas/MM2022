@@ -104,6 +104,15 @@ public class MMRepository {
         return jdbcTemplate.queryForObject(sql, paramMap, Integer.class);
     }
 
+
+    public List<GameScore> gameScore() {
+        String sql = "SELECT * FROM score_table";
+        Map<String, Object> paramMap = new HashMap<>();
+        return jdbcTemplate.query(sql, paramMap, new GameScoreRowMapper());
+    }
+
+        /*public List<GameScore> gameScore (String userName,int score){
+
     public void insertUserAllPrediction(String userName, int gameId, int predictionA, int predictionB) {
         String sql = "INSERT INTO prediction (user_name, game_id, home, away) " +
                 "VALUES (:name, :id, :predA, :predB)";
@@ -115,12 +124,13 @@ public class MMRepository {
         jdbcTemplate.update(sql, paramMap);
     }
     /*public List<GamePrediction> showScore(String userName, int score) {
+
             String sql = "SELECT f.id f_id, game_nr, f.home f_home, f.away f_away, result," +
                     "p.id p_id, user_name, p.home p_home, p.away p_away " +
                     "FROM football_game f JOIN prediction p ON f.id = p.id";
             Map<String, Object> paramMap = new HashMap<>();
             paramMap.put("userName", userName);
             paramMap.put("score", score);
-            return jdbcTemplate.query(sql, paramMap, new ScoreRowMapper())
-    }*/
-}
+            return jdbcTemplate.query(sql, paramMap, new GameScoreRowMapper());*/
+
+    }

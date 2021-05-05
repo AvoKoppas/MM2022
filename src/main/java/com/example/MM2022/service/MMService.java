@@ -1,6 +1,6 @@
 package com.example.MM2022.service;
 
-import com.example.MM2022.repository.GamePrediction;
+import com.example.MM2022.repository.GameScore;
 import com.example.MM2022.repository.MMRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -49,6 +49,11 @@ public class MMService {
     public void insertRealScore(int gameNr, int resultA, int resultB) {
         mmRepository.insertRealScore(gameNr, resultA, resultB);
     }
+
+    public List<GameScore> gameScore() {
+        return mmRepository.gameScore();
+    }
+
 
     public void insertUserAllPrediction(String userName, int gameId, int predictionA, int predictionB) {
         for (int i = 0; i <= gameId; i++) {
