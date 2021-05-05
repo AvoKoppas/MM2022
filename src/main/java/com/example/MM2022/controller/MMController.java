@@ -42,6 +42,7 @@ public class MMController {
                             @PathVariable("resultB") int resultB) {
         mmService.insertRealScore(gameNr, resultA, resultB);
     }
+
     //http://localhost:8080/scoreList
     @GetMapping("scoreList")
     public List<GameScore> gameScore() {
@@ -49,9 +50,25 @@ public class MMController {
     }
     //}
 
+    //http://localhost:8080/insertUserAllPrediction/Robi///
+    @PostMapping("insertUserAllPrediction/{userName}/{gameId}/{predictionA}/{predictionB}")
+    public void insertUserAllPrediction(@PathVariable("userName") String userName,
+                                        @PathVariable("gameId") int gameId,
+                                        @PathVariable("predictionA") int predictionA,
+                                        @PathVariable("predictionB") int predictionB) {
+        mmService.insertUserAllPrediction(userName, gameId, predictionA, predictionB);
+
+    /*//http://localhost:8080/showScore/Mari/1
+    @GetMapping("showScore/{userName}/{score}")
+    public List<GamePrediction> showScore(@PathVariable ("userName") String userName,
+                                          @PathVariable("score") int score) {
+        return mmService.showScore(userName, score);*/
+        //}
+
 //    @PostMapping("")
 //    public int(){
 //
 //    }
 
+    }
 }
