@@ -18,14 +18,14 @@ public class MMRepository {
 
     public int getPoints(String userName) {
 //        try {
-            String sql = "SELECT score FROM score_table " +
-                    "WHERE user_name = :userName";
-            Map<String, Object> paramMap = new HashMap<>();
-            paramMap.put("userName", userName);
-            return jdbcTemplate.queryForObject(sql, paramMap, Integer.class);
-  //      } catch (EmptyResultDataAccessException e) {
-  //          return -1;
-  //      }
+        String sql = "SELECT score FROM score_table " +
+                "WHERE user_name = :userName";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("userName", userName);
+        return jdbcTemplate.queryForObject(sql, paramMap, Integer.class);
+        //      } catch (EmptyResultDataAccessException e) {
+        //          return -1;
+        //      }
     }
 
     public void updateScore(String userName, int points) {
@@ -102,6 +102,17 @@ public class MMRepository {
         paramMap.put("gameId", gameId);
         paramMap.put("userName", userName);
         return jdbcTemplate.queryForObject(sql, paramMap, Integer.class);
+    }
+
+    public void insertUserAllPrediction(String userName, int gameId, int predictionA, int predictionB) {
+        String sql = "INSERT INTO prediction (user_name, game_id, home, away) " +
+                "VALUES (:name, :id, :predA, :predB)";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("name", userName);
+        paramMap.put("id", gameId);
+        paramMap.put("predA", predictionA);
+        paramMap.put("predB", predictionB);
+        jdbcTemplate.update(sql, paramMap);
     }
     /*public List<GamePrediction> showScore(String userName, int score) {
             String sql = "SELECT f.id f_id, game_nr, f.home f_home, f.away f_away, result," +

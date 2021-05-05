@@ -21,7 +21,7 @@ public class MMService {
                 && mmRepository.getResultAway(gameId) == mmRepository.getPredictionAway(userName, gameId)) {       //kui on täpne skoor
             points = points + 2;
             mmRepository.updateScore(userName, points);
-            System.out.println( mmRepository.getPoints(userName) + " BINGO! Täpne skoor");
+            System.out.println(mmRepository.getPoints(userName) + " BINGO! Täpne skoor");
         } else if (mmRepository.getResultHome(gameId) > mmRepository.getResultAway(gameId)
                 && mmRepository.getPredictonHome(userName, gameId) > mmRepository.getPredictionAway(userName, gameId)) {  //kui kodumeeskond võidab
             points = points + 1;
@@ -48,6 +48,14 @@ public class MMService {
 
     public void insertRealScore(int gameNr, int resultA, int resultB) {
         mmRepository.insertRealScore(gameNr, resultA, resultB);
+    }
+
+    public void insertUserAllPrediction(String userName, int gameId, int predictionA, int predictionB) {
+        for (int i = 0; i <= gameId; i++) {
+            for (int j = 1; j <= gameId; j++) {
+                mmRepository.insertUserAllPrediction(userName, gameId, predictionA, predictionB);
+            }
+        }
     }
     /*public List<GamePrediction> showScore(String userName, int score) {
         return mmRepository.showScore(userName, score);
