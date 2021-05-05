@@ -1,17 +1,26 @@
 package com.example.MM2022.repository;
 
-public class GamePrediction {
-    private Integer gameId;
+public class GameScore {
+    /*private Integer gameId;
     private Integer gameNr;
     private Integer gameHome;
     private Integer gameAway;
     private String result;
-    private Integer predictionId;
+    private Integer predictionId;*/
     private String userName;
-    private Integer predictionHome;
-    private Integer predictionAway;
+    //private Integer predictionHome;
+    //private Integer predictionAway;
+    private Integer score;
 
-    public Integer getGameId() {
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
+    }
+
+    /*public Integer getGameId() {
         return gameId;
     }
 
@@ -58,7 +67,7 @@ public class GamePrediction {
     public void setPredictionId(Integer predictionId) {
         this.predictionId = predictionId;
     }
-
+*/
     public String getUserName() {
         return userName;
     }
@@ -67,7 +76,7 @@ public class GamePrediction {
         this.userName = userName;
     }
 
-    public Integer getPredictionHome() {
+    /*public Integer getPredictionHome() {
         return predictionHome;
     }
 
@@ -81,5 +90,5 @@ public class GamePrediction {
 
     public void setPredictionAway(Integer predictionAway) {
         this.predictionAway = predictionAway;
-    }
+    }*/
 }
