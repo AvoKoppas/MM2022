@@ -16,27 +16,31 @@ public class MMService {
     private NamedParameterJdbcTemplate jdbcTemplate;
 
     public void calculate(String userName, int gameId) {
+
         for (int i = 1; i <= gameId; i++) {
             int points = 0;
+            int updatedPoints;
             if (mmRepository.getResultHome(i) == mmRepository.getPredictonHome(userName, i)
                     && mmRepository.getResultAway(i) == mmRepository.getPredictionAway(userName, i)) {       //kui on täpne skoor
-                points = points + 2;
-                mmRepository.updateScore(userName, points);
-                System.out.println(mmRepository.getPoints(userName) + " BINGO! Täpne skoor");
+                updatedPoints = points + 2;
+                mmRepository.updateScore(userName, updatedPoints);
+                System.out.println(" BINGO! Täpne skoor");
             } else if (mmRepository.getResultHome(i) > mmRepository.getResultAway(i)
                     && mmRepository.getPredictonHome(userName, i) > mmRepository.getPredictionAway(userName, i)) {  //kui kodumeeskond võidab
-                points = points + 1;
-                mmRepository.updateScore(userName, points);
+                updatedPoints = points + 1;
+                mmRepository.updateScore(userName, updatedPoints);
+                System.out.println(" Hea! Õige võitja, kodumeeskond võitis");
             } else if (mmRepository.getResultHome(i) < mmRepository.getResultAway(i)
                     && mmRepository.getPredictonHome(userName, i) < mmRepository.getPredictionAway(userName, i)) {  //kui võõrsilmeeskond võidab
-                points = points + 1;
-                mmRepository.updateScore(userName, points);
+                updatedPoints = points + 1;
+                mmRepository.updateScore(userName, updatedPoints);
+                System.out.println(" Hea! Õige võitja, võõrsil meeskond võitis");
             } else if (mmRepository.getResultHome(i) - mmRepository.getResultAway(i)
                     == mmRepository.getPredictonHome(userName, i) - mmRepository.getPredictionAway(userName, i)) {  //kui on viik
-                points = points + 1;
-                mmRepository.updateScore(userName, points);
+                updatedPoints = points + 1;
+                mmRepository.updateScore(userName, updatedPoints);
+                System.out.println(" Hea! Viik");
             }
-            mmRepository.updateScore(userName, points);
         }
     }
 
