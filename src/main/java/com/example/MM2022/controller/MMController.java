@@ -60,7 +60,7 @@ public class MMController {
 //                                        @PathVariable("predictionB") int predictionB) {
 //        mmService.insertUserAllPrediction(userName, gameId, predictionA, predictionB);
 
-=======
+
     //http://localhost:8080/insertUserAllPrediction/Robi///
     /*@PostMapping("insertUserAllPrediction/{userName}/{gameId}/{predictionA}/{predictionB}")
     public void insertUserAllPrediction(@PathVariable("userName") String userName,
@@ -86,5 +86,5 @@ public class MMController {
 }
 
 
-}
+
 
