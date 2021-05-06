@@ -16,27 +16,52 @@ public class MMService {
     private NamedParameterJdbcTemplate jdbcTemplate;
 
     public void calculate(String userName, int gameId) {
-        int points = mmRepository.getPoints(userName);
-        if (mmRepository.getResultHome(gameId) == mmRepository.getPredictonHome(userName, gameId)
-                && mmRepository.getResultAway(gameId) == mmRepository.getPredictionAway(userName, gameId)) {       //kui on täpne skoor
-            points = points + 2;
-            mmRepository.updateScore(userName, points);
-            System.out.println(mmRepository.getPoints(userName) + " BINGO! Täpne skoor");
-        } else if (mmRepository.getResultHome(gameId) > mmRepository.getResultAway(gameId)
-                && mmRepository.getPredictonHome(userName, gameId) > mmRepository.getPredictionAway(userName, gameId)) {  //kui kodumeeskond võidab
-            points = points + 1;
-            mmRepository.updateScore(userName, points);
-        } else if (mmRepository.getResultHome(gameId) < mmRepository.getResultAway(gameId)
-                && mmRepository.getPredictonHome(userName, gameId) < mmRepository.getPredictionAway(userName, gameId)) {  //kui võõrsilmeeskond võidab
-            points = points + 1;
-            mmRepository.updateScore(userName, points);
-        } else if (mmRepository.getResultHome(gameId) - mmRepository.getResultAway(gameId)
-                == mmRepository.getPredictonHome(userName, gameId) - mmRepository.getPredictionAway(userName, gameId)) {  //kui on viik
-            points = points + 1;
+        for (int i = 1; i <= gameId; i++) {
+            int points = 0;
+            if (mmRepository.getResultHome(i) == mmRepository.getPredictonHome(userName, i)
+                    && mmRepository.getResultAway(i) == mmRepository.getPredictionAway(userName, i)) {       //kui on täpne skoor
+                points = points + 2;
+                mmRepository.updateScore(userName, points);
+                System.out.println(mmRepository.getPoints(userName) + " BINGO! Täpne skoor");
+            } else if (mmRepository.getResultHome(i) > mmRepository.getResultAway(i)
+                    && mmRepository.getPredictonHome(userName, i) > mmRepository.getPredictionAway(userName, i)) {  //kui kodumeeskond võidab
+                points = points + 1;
+                mmRepository.updateScore(userName, points);
+            } else if (mmRepository.getResultHome(i) < mmRepository.getResultAway(i)
+                    && mmRepository.getPredictonHome(userName, i) < mmRepository.getPredictionAway(userName, i)) {  //kui võõrsilmeeskond võidab
+                points = points + 1;
+                mmRepository.updateScore(userName, points);
+            } else if (mmRepository.getResultHome(i) - mmRepository.getResultAway(i)
+                    == mmRepository.getPredictonHome(userName, i) - mmRepository.getPredictionAway(userName, i)) {  //kui on viik
+                points = points + 1;
+                mmRepository.updateScore(userName, points);
+            }
             mmRepository.updateScore(userName, points);
         }
-        mmRepository.updateScore(userName, points);
     }
+
+//    public void calculate(String userName, int gameId) {
+//        int points = mmRepository.getPoints(userName);
+//        if (mmRepository.getResultHome(gameId) == mmRepository.getPredictonHome(userName, gameId)
+//                && mmRepository.getResultAway(gameId) == mmRepository.getPredictionAway(userName, gameId)) {       //kui on täpne skoor
+//            points = points + 2;
+//            mmRepository.updateScore(userName, points);
+//            System.out.println(mmRepository.getPoints(userName) + " BINGO! Täpne skoor");
+//        } else if (mmRepository.getResultHome(gameId) > mmRepository.getResultAway(gameId)
+//                && mmRepository.getPredictonHome(userName, gameId) > mmRepository.getPredictionAway(userName, gameId)) {  //kui kodumeeskond võidab
+//            points = points + 1;
+//            mmRepository.updateScore(userName, points);
+//        } else if (mmRepository.getResultHome(gameId) < mmRepository.getResultAway(gameId)
+//                && mmRepository.getPredictonHome(userName, gameId) < mmRepository.getPredictionAway(userName, gameId)) {  //kui võõrsilmeeskond võidab
+//            points = points + 1;
+//            mmRepository.updateScore(userName, points);
+//        } else if (mmRepository.getResultHome(gameId) - mmRepository.getResultAway(gameId)
+//                == mmRepository.getPredictonHome(userName, gameId) - mmRepository.getPredictionAway(userName, gameId)) {  //kui on viik
+//            points = points + 1;
+//            mmRepository.updateScore(userName, points);
+//        }
+//        mmRepository.updateScore(userName, points);
+//    }
 
     public void insertPrediction(String userName, int gameId, int predictionA, int predictionB) {
         mmRepository.insertPrediction(userName, gameId, predictionA, predictionB);
@@ -71,8 +96,6 @@ public class MMService {
 //            }
 //        }
 //    }
-=======
-
     /*public void insertUserAllPrediction(String userName, int gameId, int predictionA, int predictionB) {
         for (int i = 0; i <= gameId; i++) {
 

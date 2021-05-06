@@ -38,12 +38,17 @@
         </createTable>
     </changeSet>
 
-<!--    <changeSet id="06.05.2021" author="Avo Koppas">-->
-<!--        <dropForeignKeyConstraint baseTableName="prediction" constraintName="foreignKeyName"/>-->
-<!--        <addForeignKeyConstraint baseTableName="prediction" baseColumnNames="game_id" constraintName="foreignKeyName"-->
-<!--                                 referencedTableName="fk_prediction_football_game"-->
-<!--                                 referencedColumnNames="football_game(game_nr)"/>-->
-
-<!--    </changeSet>-->
+    <changeSet id="06.05.2021" author="Avo Koppas">
+        <dropForeignKeyConstraint baseTableName="prediction"
+                                  constraintName="fk_prediction_football_game"/>
+        <dropColumn tableName="football_game"
+                    columnName="id">
+        </dropColumn>
+        <addPrimaryKey tableName="football_game" columnNames="game_nr"/>
+        <addForeignKeyConstraint baseTableName="prediction" baseColumnNames="game_id"
+                                 constraintName="fk_prediction_football_game"
+                                 referencedTableName="football_game"
+                                 referencedColumnNames="game_nr"/>
+    </changeSet>
 
 </databaseChangeLog>
