@@ -14,6 +14,7 @@
             <column name="away" type="int"/>
             <column name="result" type="text"/>
         </createTable>
+
         <createTable tableName="prediction">
             <column name="id" type="int" autoIncrement="true">
                 <constraints primaryKey="true"/>
@@ -36,5 +37,13 @@
             <column name="score" type="int"/>
         </createTable>
     </changeSet>
+
+<!--    <changeSet id="06.05.2021" author="Avo Koppas">-->
+<!--        <dropForeignKeyConstraint baseTableName="prediction" constraintName="foreignKeyName"/>-->
+<!--        <addForeignKeyConstraint baseTableName="prediction" baseColumnNames="game_id" constraintName="foreignKeyName"-->
+<!--                                 referencedTableName="fk_prediction_football_game"-->
+<!--                                 referencedColumnNames="football_game(game_nr)"/>-->
+
+<!--    </changeSet>-->
 
 </databaseChangeLog>

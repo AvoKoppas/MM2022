@@ -4,10 +4,7 @@ import com.example.MM2022.repository.GameScore;
 import com.example.MM2022.service.MMService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,6 +16,7 @@ public class MMController {
     @Autowired
     MMService mmService;
 
+    @CrossOrigin
     //http://localhost:8080/calculateScore/Mari/1
     @PostMapping("calculateScore/{userName}/{gameId}")
     public void calculateScore(@PathVariable("userName") String userName,
@@ -26,6 +24,7 @@ public class MMController {
         mmService.calculate(userName, gameId);
     }
 
+    @CrossOrigin
     //http://localhost:8080/insert/Mari/1/2/4
     @PostMapping("insert/{userName}/{gameId}/{predictionA}/{predictionB}")
     public void insert(@PathVariable("userName") String userName,
@@ -35,6 +34,7 @@ public class MMController {
         mmService.insertPrediction(userName, gameId, predictionA, predictionB);
     }
 
+    @CrossOrigin
     //http://localhost:8080/insertScore/1/2/3
     @PostMapping("insertScore/{gameNr}/{resultA}/{resultB}")
     public void insertScore(@PathVariable("gameNr") int gameNr,
@@ -43,6 +43,7 @@ public class MMController {
         mmService.insertRealScore(gameNr, resultA, resultB);
     }
 
+    @CrossOrigin
     //http://localhost:8080/scoreList
     @GetMapping("scoreList")
     public List<GameScore> gameScore() {
@@ -50,25 +51,24 @@ public class MMController {
     }
     //}
 
-    //http://localhost:8080/insertUserAllPrediction/Robi///
-    @PostMapping("insertUserAllPrediction/{userName}/{gameId}/{predictionA}/{predictionB}")
-    public void insertUserAllPrediction(@PathVariable("userName") String userName,
-                                        @PathVariable("gameId") int gameId,
-                                        @PathVariable("predictionA") int predictionA,
-                                        @PathVariable("predictionB") int predictionB) {
-        mmService.insertUserAllPrediction(userName, gameId, predictionA, predictionB);
+//    //http://localhost:8080/insertUserAllPrediction/Robi///
+//    @PostMapping("insertUserAllPrediction/{userName}/{gameId}/{predictionA}/{predictionB}")
+//    public void insertUserAllPrediction(@PathVariable("userName") String userName,
+//                                        @PathVariable("gameId") int gameId,
+//                                        @PathVariable("predictionA") int predictionA,
+//                                        @PathVariable("predictionB") int predictionB) {
+//        mmService.insertUserAllPrediction(userName, gameId, predictionA, predictionB);
 
     /*//http://localhost:8080/showScore/Mari/1
     @GetMapping("showScore/{userName}/{score}")
     public List<GamePrediction> showScore(@PathVariable ("userName") String userName,
                                           @PathVariable("score") int score) {
         return mmService.showScore(userName, score);*/
-        //}
+    //}
 
 //    @PostMapping("")
 //    public int(){
 //
 //    }
 
-    }
 }
