@@ -110,7 +110,11 @@ public class MMRepository {
         return jdbcTemplate.query(sql, paramMap, new GameScoreRowMapper());
     }
 
+
     /*public List<GameScore> gameScore(String userName, int score) {
+
+//        public List<GameScore> gameScore (String userName,int score){
+
 
         public void insertUserAllPrediction (String userName,int gameId, int predictionA, int predictionB){
             String sql = "INSERT INTO prediction (user_name, game_id, home, away) " +
