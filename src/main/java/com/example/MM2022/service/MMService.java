@@ -55,13 +55,13 @@ public class MMService {
     }
 
 
-    public void insertUserAllPrediction(String userName, int gameId, int predictionA, int predictionB) {
+    /*public void insertUserAllPrediction(String userName, int gameId, int predictionA, int predictionB) {
         for (int i = 0; i <= gameId; i++) {
             for (int j = 1; j <= gameId; j++) {
                 mmRepository.insertUserAllPrediction(userName, gameId, predictionA, predictionB);
             }
         }
-    }
+    }*/
     /*public List<GamePrediction> showScore(String userName, int score) {
         return mmRepository.showScore(userName, score);
     }*/

@@ -104,25 +104,26 @@ public class MMRepository {
         return jdbcTemplate.queryForObject(sql, paramMap, Integer.class);
     }
 
-
     public List<GameScore> gameScore() {
         String sql = "SELECT * FROM score_table";
         Map<String, Object> paramMap = new HashMap<>();
         return jdbcTemplate.query(sql, paramMap, new GameScoreRowMapper());
     }
 
-        /*public List<GameScore> gameScore (String userName,int score){
+    /*public List<GameScore> gameScore(String userName, int score) {
 
-    public void insertUserAllPrediction(String userName, int gameId, int predictionA, int predictionB) {
-        String sql = "INSERT INTO prediction (user_name, game_id, home, away) " +
-                "VALUES (:name, :id, :predA, :predB)";
-        Map<String, Object> paramMap = new HashMap<>();
-        paramMap.put("name", userName);
-        paramMap.put("id", gameId);
-        paramMap.put("predA", predictionA);
-        paramMap.put("predB", predictionB);
-        jdbcTemplate.update(sql, paramMap);
-    }
+        public void insertUserAllPrediction (String userName,int gameId, int predictionA, int predictionB){
+            String sql = "INSERT INTO prediction (user_name, game_id, home, away) " +
+                    "VALUES (:name, :id, :predA, :predB)";
+            Map<String, Object> paramMap = new HashMap<>();
+            paramMap.put("name", userName);
+            paramMap.put("id", gameId);
+            paramMap.put("predA", predictionA);
+            paramMap.put("predB", predictionB);
+            jdbcTemplate.update(sql, paramMap);
+        }
+    }*/
+}
     /*public List<GamePrediction> showScore(String userName, int score) {
 
             String sql = "SELECT f.id f_id, game_nr, f.home f_home, f.away f_away, result," +
@@ -133,4 +134,4 @@ public class MMRepository {
             paramMap.put("score", score);
             return jdbcTemplate.query(sql, paramMap, new GameScoreRowMapper());*/
 
-    }
+
