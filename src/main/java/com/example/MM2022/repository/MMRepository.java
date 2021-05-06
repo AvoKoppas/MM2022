@@ -17,15 +17,11 @@ public class MMRepository {
     private NamedParameterJdbcTemplate jdbcTemplate;
 
     public int getPoints(String userName) {
-//        try {
         String sql = "SELECT score FROM score_table " +
                 "WHERE user_name = :userName";
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("userName", userName);
         return jdbcTemplate.queryForObject(sql, paramMap, Integer.class);
-        //      } catch (EmptyResultDataAccessException e) {
-        //          return -1;
-        //      }
     }
 
     public void updateScore(String userName, int points) {
@@ -137,5 +133,8 @@ public class MMRepository {
             paramMap.put("userName", userName);
             paramMap.put("score", score);
             return jdbcTemplate.query(sql, paramMap, new GameScoreRowMapper());*/
+
+}
+
 
 

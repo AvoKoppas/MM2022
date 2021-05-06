@@ -42,10 +42,6 @@ public class MMService {
         mmRepository.insertPrediction(userName, gameId, predictionA, predictionB);
     }
 
-//    public void getPrediction(String userName, int gameId) {
-//        mmRepository.getPrediction(userName, gameId);
-//    }
-
     public void insertRealScore(int gameNr, int resultA, int resultB) {
         mmRepository.insertRealScore(gameNr, resultA, resultB);
     }
@@ -53,8 +49,29 @@ public class MMService {
     public List<GameScore> gameScore() {
         return mmRepository.gameScore();
     }
+//    public void getPrediction(String userName, int gameId) {
+
+//        mmRepository.getPrediction(userName, gameId);
+
+//    }
 
 
+//    public void insertUserAllPrediction(String userName, int gameId, int predictionA, int predictionB) {
+//        for (int i = 0; i <= gameId; i++) {
+//            for (int j = 1; j <= gameId; j++) {
+//                mmRepository.insertUserAllPrediction(userName, gameId, predictionA, predictionB);
+//            }
+//        }
+//    }
+
+//    public void insertUserAllPrediction(String userName, int gameId, int predictionA, int predictionB) {
+//        for (int i = 0; i <= gameId; i++) {
+//            for (int j = 1; j <= gameId; j++) {
+//                mmRepository.insertUserAllPrediction(userName, gameId, predictionA, predictionB);
+//            }
+//        }
+//    }
+=======
 
     /*public void insertUserAllPrediction(String userName, int gameId, int predictionA, int predictionB) {
         for (int i = 0; i <= gameId; i++) {
@@ -67,6 +84,7 @@ public class MMService {
             }
         }
     }*/
+
     /*public List<GamePrediction> showScore(String userName, int score) {
         return mmRepository.showScore(userName, score);
     }*/
