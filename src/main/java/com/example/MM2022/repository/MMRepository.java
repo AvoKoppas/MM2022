@@ -24,6 +24,7 @@ public class MMRepository {
         return jdbcTemplate.queryForObject(sql, paramMap, Integer.class);
     }
 
+    //Edetabeli seisu uuendaja.
     public void updateScore(String userName, int points) {
         String sql = "UPDATE score_table SET score=:value WHERE user_name=:userName";
         Map<String, Object> paramMap = new HashMap<>();
@@ -32,6 +33,7 @@ public class MMRepository {
         jdbcTemplate.update(sql, paramMap);
     }
 
+    //Ennustustetabeli täitja
     public void insertPrediction(String userName, int gameId, int predictionA, int predictionB) {
         String sql = "INSERT INTO prediction (user_name, game_id, home, away) " +
                 "VALUES (:name, :id, :predA, :predB)";
@@ -43,6 +45,7 @@ public class MMRepository {
         jdbcTemplate.update(sql, paramMap);
     }
 
+    //Mängutulemustetabeli täitja
     public void insertRealScore(int gameNr, int resultA, int resultB) {
         String sql = "INSERT INTO football_game (game_nr, home, away)" +
                 "VALUES (:number, :resultA, :resultB)";
@@ -53,6 +56,7 @@ public class MMRepository {
         jdbcTemplate.update(sql, paramMap);
     }
 
+    //Võtab mängutulemustetabelist koduvõistkonna punktiarvu
     public int getResultHome(int gameId) {
         String sql = "SELECT home FROM football_game " +
                 "WHERE game_nr = :gameNr";
@@ -61,6 +65,7 @@ public class MMRepository {
         return jdbcTemplate.queryForObject(sql, paramMap, Integer.class);
     }
 
+    //Võtab mängutulemustetabelist võõrsilvõistkonna punktiarvu
     public int getResultAway(int gameId) {
         String sql = "SELECT away FROM football_game " +
                 "WHERE game_nr = :gameNr";
@@ -69,6 +74,7 @@ public class MMRepository {
         return jdbcTemplate.queryForObject(sql, paramMap, Integer.class);
     }
 
+    //Võtab ennustustetabelist koduvõistkonna punktiarvu
     public int getPredictonHome(String userName, int gameId) {
         String sql = "SELECT home FROM prediction " +
                 "WHERE game_id = :gameId AND user_name=:userName";
@@ -78,6 +84,7 @@ public class MMRepository {
         return jdbcTemplate.queryForObject(sql, paramMap, Integer.class);
     }
 
+    //Võtab ennustustetabelist võõrsilvõistkonna punktiarvu
     public int getPredictionAway(String userName, int gameId) {
         String sql = "SELECT away FROM prediction " +
                 "WHERE game_id = :gameId AND user_name=:userName";
@@ -91,27 +98,27 @@ public class MMRepository {
 
     }
 
+    //Kuvab välja mängijate ennustustetabeli
     public List<GameScore> gameScore() {
         String sql = "SELECT * FROM score_table";
         Map<String, Object> paramMap = new HashMap<>();
         return jdbcTemplate.query(sql, paramMap, new GameScoreRowMapper());
     }
-    /*public List<GameScore> gameScore(String userName, int score) {
 
 //        public List<GameScore> gameScore (String userName,int score){
 
 
-        public void insertUserAllPrediction (String userName,int gameId, int predictionA, int predictionB){
-            String sql = "INSERT INTO prediction (user_name, game_id, home, away) " +
-                    "VALUES (:name, :id, :predA, :predB)";
-            Map<String, Object> paramMap = new HashMap<>();
-            paramMap.put("name", userName);
-            paramMap.put("id", gameId);
-            paramMap.put("predA", predictionA);
-            paramMap.put("predB", predictionB);
-            jdbcTemplate.update(sql, paramMap);
-        }
-    }*/
+//        public void insertUserAllPrediction (String userName,int gameId, int predictionA, int predictionB){
+//            String sql = "INSERT INTO prediction (user_name, game_id, home, away) " +
+//                    "VALUES (:name, :id, :predA, :predB)";
+//            Map<String, Object> paramMap = new HashMap<>();
+//            paramMap.put("name", userName);
+//            paramMap.put("id", gameId);
+//            paramMap.put("predA", predictionA);
+//            paramMap.put("predB", predictionB);
+//            jdbcTemplate.update(sql, paramMap);
+//        }
+//    }*/
     //    public int getPrediction(String userName, int gameId) {
 //        String sql = "SELECT home, away FROM prediction " +
 //                "WHERE user_name=:muutuja1, game_id = :gameId";
