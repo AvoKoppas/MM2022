@@ -18,10 +18,11 @@ public class MMController {
 
     @CrossOrigin
     //http://localhost:8080/calculateScore/Veiko/1
-    @PostMapping("calculateScore/{userName}/{gameId}")
-    public void calculateScore(@PathVariable("userName") String userName,
-                               @PathVariable("gameId") int gameId) {
-        mmService.calculate(userName, gameId);
+    @PostMapping("calculateScore/{userName}")
+    public int calculateScore(@PathVariable("userName") String userName)
+                          //     @PathVariable("gameId") int gameId)
+                                  {
+       return mmService.calculate(userName);
     }
 
     @CrossOrigin
