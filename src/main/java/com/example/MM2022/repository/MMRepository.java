@@ -105,6 +105,15 @@ public class MMRepository {
         return jdbcTemplate.query(sql, paramMap, new GameScoreRowMapper());
     }
 
+    public void insertToScoreTable(String userName) {
+        String sql = "INSERT INTO score_table (user_name, score) " +
+                "VALUES (:name, :score)";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("name", userName);
+        paramMap.put("score", 0);
+        jdbcTemplate.update(sql, paramMap);
+    }
+
 //        public List<GameScore> gameScore (String userName,int score){
 
 
