@@ -50,5 +50,9 @@
                                  referencedTableName="football_game"
                                  referencedColumnNames="game_nr"/>
     </changeSet>
+    <changeSet id="07.05.2021" author="Veiko Ilves">
+        <addUniqueConstraint tableName="prediction" columnNames="user_name, game_id"
+                             constraintName="unique_prediction"/>
+    </changeSet>
 
 </databaseChangeLog>

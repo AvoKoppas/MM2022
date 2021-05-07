@@ -17,7 +17,7 @@ public class MMController {
     MMService mmService;
 
     @CrossOrigin
-    //http://localhost:8080/calculateScore/Mari/1
+    //http://localhost:8080/calculateScore/Veiko/1
     @PostMapping("calculateScore/{userName}/{gameId}")
     public void calculateScore(@PathVariable("userName") String userName,
                                @PathVariable("gameId") int gameId) {
@@ -25,7 +25,7 @@ public class MMController {
     }
 
     @CrossOrigin
-    //http://localhost:8080/insert/Mari/1/2/4
+    //http://localhost:8080/insert/Veiko/1/1/1
     @PostMapping("insert/{userName}/{gameId}/{predictionA}/{predictionB}")
     public void insert(@PathVariable("userName") String userName,
                        @PathVariable("gameId") int gameId,
@@ -35,7 +35,7 @@ public class MMController {
     }
 
     @CrossOrigin
-    //http://localhost:8080/insertScore/1/2/3
+    //http://localhost:8080/insertScore/1/2/4
     @PostMapping("insertScore/{gameNr}/{resultA}/{resultB}")
     public void insertScore(@PathVariable("gameNr") int gameNr,
                             @PathVariable("resultA") int resultA,
