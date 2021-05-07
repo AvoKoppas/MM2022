@@ -114,6 +114,14 @@ public class MMRepository {
         jdbcTemplate.update(sql, paramMap);
     }
 
+    public void insertGameNrToFootballGameTable(int gameId) {
+        String sql = "INSERT INTO football_game (game_nr) " +
+                "VALUES (:id)";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("id", gameId);
+        jdbcTemplate.update(sql, paramMap);
+    }
+
 //        public List<GameScore> gameScore (String userName,int score){
 
 

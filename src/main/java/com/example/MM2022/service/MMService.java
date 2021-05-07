@@ -17,8 +17,9 @@ public class MMService {
 
     //Meetod arvestab punkte. Teeb seda tsüklina. Tsükli pikkuseks on mängitud mängude arv
     // e. kui tabelisse on sisestatud 4 mängu tulemus, siis meetod teeb 4 tsüklit.
-    public void calculate(String userName, int gameId) {
+    public int calculate(String userName) {
         int points = 0;
+        int gameId = 5;
         for (int i = 1; i <= gameId; i++) {
             //kui on täpne skoor
             if (mmRepository.getResultHome(i) == mmRepository.getPredictonHome(userName, i)
@@ -43,6 +44,7 @@ public class MMService {
             }
         }
         mmRepository.updateScore(userName, points);
+        return mmRepository.getPoints(userName);
     }
 
     //Sisestab ennustustetabelisse ühe kasutaja ennustused.
