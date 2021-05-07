@@ -51,4 +51,11 @@
                                  referencedColumnNames="game_nr"/>
     </changeSet>
 
+    <changeSet id="07.05.2021" author="Avo Koppas">
+        <addUniqueConstraint tableName="score_table" columnNames="user_name">
+
+        </addUniqueConstraint>
+
+    </changeSet>
+
 </databaseChangeLog>
