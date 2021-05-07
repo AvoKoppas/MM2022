@@ -100,9 +100,21 @@ public class MMRepository {
 
     //Kuvab välja mängijate ennustustetabeli
     public List<GameScore> gameScore() {
-        String sql = "SELECT * FROM score_table";
+        String sql = "SELECT * FROM score_table ORDER BY score DESC";
         Map<String, Object> paramMap = new HashMap<>();
         return jdbcTemplate.query(sql, paramMap, new GameScoreRowMapper());
+    }
+
+    public boolean doesScoreTableEntryExists(String userName) {
+        String sql = "SELECT count(*) > 0 FROM score_table WHERE user_name = :userName";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("userName", userName);
+        return jdbcTemplate.queryForObject(sql, paramMap, Boolean.class);
+    }
+
+    public List<String> getAllUserNames() {
+        String sql = "SELECT user_name FROM score_table";
+        return jdbcTemplate.queryForList(sql, new HashMap<>(), String.class);
     }
 
     public void insertToScoreTable(String userName) {
