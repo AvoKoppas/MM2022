@@ -57,7 +57,7 @@ public class MMRepository {
     }
 
     //Võtab mängutulemustetabelist koduvõistkonna punktiarvu
-    public int getResultHome(int gameId) {
+    public Integer getResultHome(int gameId) {
         String sql = "SELECT home FROM football_game " +
                 "WHERE game_nr = :gameNr";
         Map<String, Object> paramMap = new HashMap<>();
@@ -66,7 +66,7 @@ public class MMRepository {
     }
 
     //Võtab mängutulemustetabelist võõrsilvõistkonna punktiarvu
-    public int getResultAway(int gameId) {
+    public Integer getResultAway(int gameId) {
         String sql = "SELECT away FROM football_game " +
                 "WHERE game_nr = :gameNr";
         Map<String, Object> paramMap = new HashMap<>();
@@ -75,7 +75,7 @@ public class MMRepository {
     }
 
     //Võtab ennustustetabelist koduvõistkonna punktiarvu
-    public int getPredictonHome(String userName, int gameId) {
+    public Integer getPredictionHome(String userName, int gameId) {
         String sql = "SELECT home FROM prediction " +
                 "WHERE game_id = :gameId AND user_name=:userName";
         Map<String, Object> paramMap = new HashMap<>();
@@ -85,7 +85,7 @@ public class MMRepository {
     }
 
     //Võtab ennustustetabelist võõrsilvõistkonna punktiarvu
-    public int getPredictionAway(String userName, int gameId) {
+    public Integer getPredictionAway(String userName, int gameId) {
         String sql = "SELECT away FROM prediction " +
                 "WHERE game_id = :gameId AND user_name=:userName";
         Map<String, Object> paramMap = new HashMap<>();
