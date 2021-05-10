@@ -16,6 +16,13 @@ public class MMRepository {
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
+    public String getKickOff(int gameId) {
+        String sql = "SELECT kick_off FROM football_game WHERE game_id =:gameId";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("gameId", gameId);
+        return jdbcTemplate.queryForObject(sql, paramMap, String.class);
+    }
+
     public int getPoints(String userName) {
         String sql = "SELECT score FROM score_table " +
                 "WHERE user_name = :userName";

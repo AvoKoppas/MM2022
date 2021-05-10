@@ -4,9 +4,15 @@ import com.example.MM2022.repository.GameScore;
 import com.example.MM2022.repository.MMRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.HttpInputMessage;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -27,9 +33,12 @@ public class MMService {
                 Integer resultHome = mmRepository.getResultHome(i);
                 Integer resultAway = mmRepository.getResultAway(i);
                 Integer predictionAway = mmRepository.getPredictionAway(userName, i);
-                if(resultHome == null || resultAway == null){
+                if (resultHome == null || resultAway == null) {
                     continue;
                 }
+                //          if () {
+
+                //        }
                 //kui on täpne skoor
                 if (resultHome == predictionHome
                         && resultAway == predictionAway) {
@@ -51,7 +60,7 @@ public class MMService {
                     points = points + 1;
                     System.out.println(" Hea! Viik");
                 }
-            } catch(EmptyResultDataAccessException e){
+            } catch (EmptyResultDataAccessException e) {
                 // no prediction or no results
             }
         }
@@ -76,33 +85,13 @@ public class MMService {
     public List<GameScore> gameScore() {
         return mmRepository.gameScore();
     }
-//    public void getPrediction(String userName, int gameId) {
 
-//        mmRepository.getPrediction(userName, gameId);
-
-//    }
-
-//    public void insertUserAllPrediction(String userName, int gameId, int predictionA, int predictionB) {
-//        for (int i = 0; i <= gameId; i++) {
-//            for (int j = 1; j <= gameId; j++) {
-//                mmRepository.insertUserAllPrediction(userName, gameId, predictionA, predictionB);
-//            }
+//    public boolean validateTime() {
+//        Date currentTime = new Date();
+//        Date kickOff = new Date(mmRepository.getKickOff);
+//        if (currentTime.after(kickOff)) {
+//            return false;
 //        }
+//        return true;
 //    }
-
-    /*public void insertUserAllPrediction(String userName, int gameId, int predictionA, int predictionB) {
-        for (int i = 0; i <= gameId; i++) {
-
-    public void insertUserAllPrediction(String userName, int gameId, int predictionA, int predictionB) {
-        for (int i = 1; i <= gameId; i++) {
-
-            for (int j = 1; j <= gameId; j++) {
-                mmRepository.insertUserAllPrediction(userName, gameId, predictionA, predictionB);
-            }
-        }
-    }*/
-
-    /*public List<GamePrediction> showScore(String userName, int score) {
-        return mmRepository.showScore(userName, score);
-    }*/
 }
