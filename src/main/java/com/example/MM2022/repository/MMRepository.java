@@ -80,7 +80,11 @@ public class MMRepository {
     }
 
     //Võtab ennustustetabelist koduvõistkonna punktiarvu
+
+    
+
     public Integer getPredictionHome(String userName, int gameId) {
+
         String sql = "SELECT home FROM prediction " +
                 "WHERE game_id = :gameId AND user_name=:userName";
         Map<String, Object> paramMap = new HashMap<>();
@@ -129,6 +133,14 @@ public class MMRepository {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("name", userName);
         paramMap.put("score", 0);
+        jdbcTemplate.update(sql, paramMap);
+    }
+
+    public void createAccount(String userName, String password) {
+        String sql = "INSERT INTO registry (user_name, password)" + "VALUES (:name, :password1)";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("name", userName);
+        paramMap.put("password1", password);
         jdbcTemplate.update(sql, paramMap);
     }
 

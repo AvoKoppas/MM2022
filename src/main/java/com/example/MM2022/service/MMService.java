@@ -7,11 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpInputMessage;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+
 
 import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 
 import java.util.Date;
 import java.util.List;
@@ -22,6 +28,7 @@ public class MMService {
     private MMRepository mmRepository;
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
+
 
     //Meetod arvestab punkte. Teeb seda tsüklina. Tsükli pikkuseks on mängitud mängude arv
     // e. kui tabelisse on sisestatud 4 mängu tulemus, siis meetod teeb 4 tsüklit.
@@ -82,6 +89,7 @@ public class MMService {
     public void insertRealScore(int gameNr, int resultA, int resultB) {
         mmRepository.insertRealScore(gameNr, resultA, resultB);
     }
+
 
     //Kuvab välja mängijate edetabeli!
     public List<GameScore> gameScore() {
