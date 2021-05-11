@@ -5,10 +5,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Repository
 public class MMRepository {
@@ -16,11 +13,11 @@ public class MMRepository {
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
-    public String getKickOff(int gameId) {
+    public Date getKickOff(int gameId) {
         String sql = "SELECT kick_off FROM football_game WHERE game_id =:gameId";
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("gameId", gameId);
-        return jdbcTemplate.queryForObject(sql, paramMap, String.class);
+        return jdbcTemplate.queryForObject(sql, paramMap, Date.class);
     }
 
     public int getPoints(String userName) {
@@ -112,6 +109,7 @@ public class MMRepository {
         return jdbcTemplate.query(sql, paramMap, new GameScoreRowMapper());
     }
 
+    // kontrollib, kas edetabelis on mängija nimi juba olemas
     public boolean doesScoreTableEntryExists(String userName) {
         String sql = "SELECT count(*) > 0 FROM score_table WHERE user_name = :userName";
         Map<String, Object> paramMap = new HashMap<>();

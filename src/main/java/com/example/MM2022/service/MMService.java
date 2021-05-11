@@ -36,9 +36,6 @@ public class MMService {
                 if (resultHome == null || resultAway == null) {
                     continue;
                 }
-                //          if () {
-
-                //        }
                 //kui on täpne skoor
                 if (resultHome == predictionHome
                         && resultAway == predictionAway) {
@@ -70,11 +67,21 @@ public class MMService {
 
     //Sisestab ennustustetabelisse ühe kasutaja ennustused.
     public void insertPrediction(String userName, int gameId, int predictionA, int predictionB) {
+//        try {
+        //           Date today = new Date();
+        //           Date kickOff = new Date(mmRepository.getKickOff(gameId));
         if (!mmRepository.doesScoreTableEntryExists(userName)) {
             mmRepository.insertToScoreTable(userName);
+//            } else if (today.after(kickOff)) {
+//                mmRepository.insertPrediction(userName, gameId, predictionA, predictionB);
+//            }
+//        } catch (EmptyResultDataAccessException e) {
+//            e.printStackTrace();
+//        }
+
         }
-        mmRepository.insertPrediction(userName, gameId, predictionA, predictionB);
     }
+
 
     // Sisestab tabelisse päriselu mängutulemused.
     public void insertRealScore(int gameNr, int resultA, int resultB) {
