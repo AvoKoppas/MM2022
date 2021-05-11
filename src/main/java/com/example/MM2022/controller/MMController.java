@@ -16,6 +16,15 @@ public class MMController {
     @Autowired
     MMService mmService;
 
+    /*@CrossOrigin
+    //http://localhost:8080/createAccount/Veiko/Ilves
+    @PostMapping("createAccount/{userName}/{Password}")
+    public void createAccount(@PathVariable("userName") String userName,
+                                @PathVariable("password") String password) {
+        return mmService.createAccount(userName, password);*/
+
+
+
     @CrossOrigin
     //http://localhost:8080/calculateScore/Veiko/1
     @PostMapping("calculateScore/{userName}")
