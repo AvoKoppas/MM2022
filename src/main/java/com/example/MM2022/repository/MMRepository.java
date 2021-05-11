@@ -5,6 +5,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Repository
@@ -13,11 +14,11 @@ public class MMRepository {
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
-    public Date getKickOff(int gameId) {
-        String sql = "SELECT kick_off FROM football_game WHERE game_id =:gameId";
+    public LocalDateTime getKickOff(int gameId) {
+        String sql = "SELECT kick_off FROM football_game WHERE game_nr =:gameId";
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("gameId", gameId);
-        return jdbcTemplate.queryForObject(sql, paramMap, Date.class);
+        return jdbcTemplate.queryForObject(sql, paramMap, LocalDateTime.class);
     }
 
     public int getPoints(String userName) {
@@ -116,12 +117,12 @@ public class MMRepository {
         paramMap.put("userName", userName);
         return jdbcTemplate.queryForObject(sql, paramMap, Boolean.class);
     }
-
+    // võtab edetabelist kõikide kasutajate nimed
     public List<String> getAllUserNames() {
         String sql = "SELECT user_name FROM score_table";
         return jdbcTemplate.queryForList(sql, new HashMap<>(), String.class);
     }
-
+    //paneb
     public void insertToScoreTable(String userName) {
         String sql = "INSERT INTO score_table (user_name, score) " +
                 "VALUES (:name, :score)";
@@ -137,6 +138,13 @@ public class MMRepository {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("id", gameId);
         jdbcTemplate.update(sql, paramMap);
+    }
+
+    public List<GameScore> gameScoreUser(String userName) {
+        String sql = "SELECT * FROM score_table WHERE user_name = :userName";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("userName", userName);
+        return jdbcTemplate.query(sql, paramMap, new GameScoreRowMapper());
     }
 
 //        public List<GameScore> gameScore (String userName,int score){

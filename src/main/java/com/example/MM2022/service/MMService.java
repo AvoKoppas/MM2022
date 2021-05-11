@@ -2,6 +2,7 @@ package com.example.MM2022.service;
 
 import com.example.MM2022.repository.GameScore;
 import com.example.MM2022.repository.MMRepository;
+import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpInputMessage;
@@ -67,21 +68,15 @@ public class MMService {
 
     //Sisestab ennustustetabelisse ühe kasutaja ennustused.
     public void insertPrediction(String userName, int gameId, int predictionA, int predictionB) {
-//        try {
-        //           Date today = new Date();
-        //           Date kickOff = new Date(mmRepository.getKickOff(gameId));
-        if (!mmRepository.doesScoreTableEntryExists(userName)) {
+        LocalDateTime kickOffTime = mmRepository.getKickOff(gameId);
+        LocalDateTime now = LocalDateTime.now();
+        if (now.isAfter(kickOffTime)) {
+            throw new RuntimeException("hiljaks jäid");
+        } else if (!mmRepository.doesScoreTableEntryExists(userName)) {
             mmRepository.insertToScoreTable(userName);
-//            } else if (today.after(kickOff)) {
-//                mmRepository.insertPrediction(userName, gameId, predictionA, predictionB);
-//            }
-//        } catch (EmptyResultDataAccessException e) {
-//            e.printStackTrace();
-//        }
-
         }
+        mmRepository.insertPrediction(userName, gameId, predictionA, predictionB);
     }
-
 
     // Sisestab tabelisse päriselu mängutulemused.
     public void insertRealScore(int gameNr, int resultA, int resultB) {
@@ -91,6 +86,10 @@ public class MMService {
     //Kuvab välja mängijate edetabeli!
     public List<GameScore> gameScore() {
         return mmRepository.gameScore();
+    }
+
+    public List<GameScore> gameScoreUser(String userName) {
+        return mmRepository.gameScoreUser(userName);
     }
 
 //    public boolean validateTime() {
