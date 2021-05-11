@@ -57,42 +57,11 @@ public class MMController {
     public List<GameScore> gameScore() {
         return mmService.gameScore();
     }
-    //}
 
-
-//    //http://localhost:8080/insertUserAllPrediction/Robi///
-//    @PostMapping("insertUserAllPrediction/{userName}/{gameId}/{predictionA}/{predictionB}")
-//    public void insertUserAllPrediction(@PathVariable("userName") String userName,
-//                                        @PathVariable("gameId") int gameId,
-//                                        @PathVariable("predictionA") int predictionA,
-//                                        @PathVariable("predictionB") int predictionB) {
-//        mmService.insertUserAllPrediction(userName, gameId, predictionA, predictionB);
-
-
-    //http://localhost:8080/insertUserAllPrediction/Robi///
-    /*@PostMapping("insertUserAllPrediction/{userName}/{gameId}/{predictionA}/{predictionB}")
-    public void insertUserAllPrediction(@PathVariable("userName") String userName,
-                                        @PathVariable("gameId") int gameId,
-                                        @PathVariable("predictionA") int predictionA,
-                                        @PathVariable("predictionB") int predictionB) {
-        mmService.insertUserAllPrediction(userName, gameId, predictionA, predictionB);
-*/
-
-    /*//http://localhost:8080/showScore/Mari/1
-    @GetMapping("showScore/{userName}/{score}")
-    public List<GamePrediction> showScore(@PathVariable ("userName") String userName,
-                                          @PathVariable("score") int score) {
-        return mmService.showScore(userName, score);*/
-    //}
-
-//    @PostMapping("")
-//    public int(){
-//
+//    @CrossOrigin
+//    @GetMapping("scoreUserList/{userName}")
+//    public List<GameScore> gameScoreUser(@PathVariable("userName") String userName) {
+//        return mmService.gameScoreUser(userName);
 //    }
 
-
 }
-
-
-
-

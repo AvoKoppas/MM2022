@@ -5,16 +5,21 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.time.LocalDateTime;
+import java.util.*;
 
 @Repository
 public class MMRepository {
 
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
+
+    public LocalDateTime getKickOff(int gameId) {
+        String sql = "SELECT kick_off FROM football_game WHERE game_nr =:gameId";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("gameId", gameId);
+        return jdbcTemplate.queryForObject(sql, paramMap, LocalDateTime.class);
+    }
 
     public int getPoints(String userName) {
         String sql = "SELECT score FROM score_table " +
@@ -75,7 +80,11 @@ public class MMRepository {
     }
 
     //Võtab ennustustetabelist koduvõistkonna punktiarvu
-    public Integer getPredictonHome(String userName, int gameId) {
+
+    
+
+    public Integer getPredictionHome(String userName, int gameId) {
+
         String sql = "SELECT home FROM prediction " +
                 "WHERE game_id = :gameId AND user_name=:userName";
         Map<String, Object> paramMap = new HashMap<>();
@@ -105,18 +114,19 @@ public class MMRepository {
         return jdbcTemplate.query(sql, paramMap, new GameScoreRowMapper());
     }
 
+    // kontrollib, kas edetabelis on mängija nimi juba olemas
     public boolean doesScoreTableEntryExists(String userName) {
         String sql = "SELECT count(*) > 0 FROM score_table WHERE user_name = :userName";
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("userName", userName);
         return jdbcTemplate.queryForObject(sql, paramMap, Boolean.class);
     }
-
+    // võtab edetabelist kõikide kasutajate nimed
     public List<String> getAllUserNames() {
         String sql = "SELECT user_name FROM score_table";
         return jdbcTemplate.queryForList(sql, new HashMap<>(), String.class);
     }
-
+    //paneb
     public void insertToScoreTable(String userName) {
         String sql = "INSERT INTO score_table (user_name, score) " +
                 "VALUES (:name, :score)";
@@ -140,6 +150,13 @@ public class MMRepository {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("id", gameId);
         jdbcTemplate.update(sql, paramMap);
+    }
+
+    public List<GameScore> gameScoreUser(String userName) {
+        String sql = "SELECT * FROM score_table WHERE user_name = :userName";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("userName", userName);
+        return jdbcTemplate.query(sql, paramMap, new GameScoreRowMapper());
     }
 
 //        public List<GameScore> gameScore (String userName,int score){

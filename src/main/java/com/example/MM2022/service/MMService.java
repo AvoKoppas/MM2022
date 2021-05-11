@@ -2,12 +2,22 @@ package com.example.MM2022.service;
 
 import com.example.MM2022.repository.GameScore;
 import com.example.MM2022.repository.MMRepository;
+import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.HttpInputMessage;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+
+
+import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 import java.util.Date;
 import java.util.List;
@@ -24,28 +34,39 @@ public class MMService {
     // e. kui tabelisse on sisestatud 4 mängu tulemus, siis meetod teeb 4 tsüklit.
     public int calculate(String userName) {
         int points = 0;
-        int gameId = 5;
+        int gameId = 36;
         for (int i = 1; i <= gameId; i++) {
-            //kui on täpne skoor
-            if (mmRepository.getResultHome(i) == mmRepository.getPredictonHome(userName, i)
-                    && mmRepository.getResultAway(i) == mmRepository.getPredictionAway(userName, i)) {
-                points = points + 2;
-                System.out.println(" BINGO! Täpne skoor");
-                //kui kodumeeskond võidab
-            } else if (mmRepository.getResultHome(i) > mmRepository.getResultAway(i)
-                    && mmRepository.getPredictonHome(userName, i) > mmRepository.getPredictionAway(userName, i)) {
-                points = points + 1;
-                System.out.println(" Hea! Õige võitja, kodumeeskond võitis");
-                //kui võõrsilmeeskond võidab
-            } else if (mmRepository.getResultHome(i) < mmRepository.getResultAway(i)
-                    && mmRepository.getPredictonHome(userName, i) < mmRepository.getPredictionAway(userName, i)) {
-                points = points + 1;
-                System.out.println(" Hea! Õige võitja, võõrsil meeskond võitis");
-                //kui on viik
-            } else if (mmRepository.getResultHome(i) - mmRepository.getResultAway(i)
-                    == mmRepository.getPredictonHome(userName, i) - mmRepository.getPredictionAway(userName, i)) {
-                points = points + 1;
-                System.out.println(" Hea! Viik");
+            try {
+                Integer predictionHome = mmRepository.getPredictionHome(userName, i);
+                Integer resultHome = mmRepository.getResultHome(i);
+                Integer resultAway = mmRepository.getResultAway(i);
+                Integer predictionAway = mmRepository.getPredictionAway(userName, i);
+                if (resultHome == null || resultAway == null) {
+                    continue;
+                }
+                //kui on täpne skoor
+                if (resultHome == predictionHome
+                        && resultAway == predictionAway) {
+                    points = points + 2;
+                    System.out.println(" BINGO! Täpne skoor");
+                    //kui kodumeeskond võidab
+                } else if (resultHome > resultAway
+                        && predictionHome > predictionAway) {
+                    points = points + 1;
+                    System.out.println(" Hea! Õige võitja, kodumeeskond võitis");
+                    //kui võõrsilmeeskond võidab
+                } else if (resultHome < resultAway
+                        && predictionHome < predictionAway) {
+                    points = points + 1;
+                    System.out.println(" Hea! Õige võitja, võõrsil meeskond võitis");
+                    //kui on viik
+                } else if (resultHome - resultAway
+                        == predictionHome - predictionAway) {
+                    points = points + 1;
+                    System.out.println(" Hea! Viik");
+                }
+            } catch (EmptyResultDataAccessException e) {
+                // no prediction or no results
             }
         }
         mmRepository.updateScore(userName, points);
@@ -54,7 +75,11 @@ public class MMService {
 
     //Sisestab ennustustetabelisse ühe kasutaja ennustused.
     public void insertPrediction(String userName, int gameId, int predictionA, int predictionB) {
-        if (!mmRepository.doesScoreTableEntryExists(userName)) {
+        LocalDateTime kickOffTime = mmRepository.getKickOff(gameId);
+        LocalDateTime now = LocalDateTime.now();
+        if (now.isAfter(kickOffTime)) {
+            throw new RuntimeException("hiljaks jäid");
+        } else if (!mmRepository.doesScoreTableEntryExists(userName)) {
             mmRepository.insertToScoreTable(userName);
         }
         mmRepository.insertPrediction(userName, gameId, predictionA, predictionB);
@@ -70,33 +95,17 @@ public class MMService {
     public List<GameScore> gameScore() {
         return mmRepository.gameScore();
     }
-//    public void getPrediction(String userName, int gameId) {
 
-//        mmRepository.getPrediction(userName, gameId);
+    public List<GameScore> gameScoreUser(String userName) {
+        return mmRepository.gameScoreUser(userName);
+    }
 
-//    }
-
-//    public void insertUserAllPrediction(String userName, int gameId, int predictionA, int predictionB) {
-//        for (int i = 0; i <= gameId; i++) {
-//            for (int j = 1; j <= gameId; j++) {
-//                mmRepository.insertUserAllPrediction(userName, gameId, predictionA, predictionB);
-//            }
+//    public boolean validateTime() {
+//        Date currentTime = new Date();
+//        Date kickOff = new Date(mmRepository.getKickOff);
+//        if (currentTime.after(kickOff)) {
+//            return false;
 //        }
+//        return true;
 //    }
-
-    /*public void insertUserAllPrediction(String userName, int gameId, int predictionA, int predictionB) {
-        for (int i = 0; i <= gameId; i++) {
-
-    public void insertUserAllPrediction(String userName, int gameId, int predictionA, int predictionB) {
-        for (int i = 1; i <= gameId; i++) {
-
-            for (int j = 1; j <= gameId; j++) {
-                mmRepository.insertUserAllPrediction(userName, gameId, predictionA, predictionB);
-            }
-        }
-    }*/
-
-    /*public List<GamePrediction> showScore(String userName, int score) {
-        return mmRepository.showScore(userName, score);
-    }*/
 }
