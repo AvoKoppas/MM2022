@@ -57,9 +57,11 @@
 
     <changeSet id="07.05.2021" author="Avo Koppas">
         <addUniqueConstraint tableName="score_table" columnNames="user_name">
-
         </addUniqueConstraint>
+    </changeSet>
 
+    <changeSet id="10.05.2021" author="Avo Koppas">
+        <renameColumn tableName="football_game" oldColumnName="result" newColumnName="kick_off"/>
     </changeSet>
 
 </databaseChangeLog>

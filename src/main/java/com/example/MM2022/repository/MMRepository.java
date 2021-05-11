@@ -5,16 +5,20 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Repository
 public class MMRepository {
 
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
+
+    public Date getKickOff(int gameId) {
+        String sql = "SELECT kick_off FROM football_game WHERE game_id =:gameId";
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("gameId", gameId);
+        return jdbcTemplate.queryForObject(sql, paramMap, Date.class);
+    }
 
     public int getPoints(String userName) {
         String sql = "SELECT score FROM score_table " +
@@ -57,7 +61,7 @@ public class MMRepository {
     }
 
     //Võtab mängutulemustetabelist koduvõistkonna punktiarvu
-    public int getResultHome(int gameId) {
+    public Integer getResultHome(int gameId) {
         String sql = "SELECT home FROM football_game " +
                 "WHERE game_nr = :gameNr";
         Map<String, Object> paramMap = new HashMap<>();
@@ -66,7 +70,7 @@ public class MMRepository {
     }
 
     //Võtab mängutulemustetabelist võõrsilvõistkonna punktiarvu
-    public int getResultAway(int gameId) {
+    public Integer getResultAway(int gameId) {
         String sql = "SELECT away FROM football_game " +
                 "WHERE game_nr = :gameNr";
         Map<String, Object> paramMap = new HashMap<>();
@@ -75,7 +79,7 @@ public class MMRepository {
     }
 
     //Võtab ennustustetabelist koduvõistkonna punktiarvu
-    public int getPredictonHome(String userName, int gameId) {
+    public Integer getPredictionHome(String userName, int gameId) {
         String sql = "SELECT home FROM prediction " +
                 "WHERE game_id = :gameId AND user_name=:userName";
         Map<String, Object> paramMap = new HashMap<>();
@@ -85,7 +89,7 @@ public class MMRepository {
     }
 
     //Võtab ennustustetabelist võõrsilvõistkonna punktiarvu
-    public int getPredictionAway(String userName, int gameId) {
+    public Integer getPredictionAway(String userName, int gameId) {
         String sql = "SELECT away FROM prediction " +
                 "WHERE game_id = :gameId AND user_name=:userName";
         Map<String, Object> paramMap = new HashMap<>();
@@ -105,6 +109,7 @@ public class MMRepository {
         return jdbcTemplate.query(sql, paramMap, new GameScoreRowMapper());
     }
 
+    // kontrollib, kas edetabelis on mängija nimi juba olemas
     public boolean doesScoreTableEntryExists(String userName) {
         String sql = "SELECT count(*) > 0 FROM score_table WHERE user_name = :userName";
         Map<String, Object> paramMap = new HashMap<>();
