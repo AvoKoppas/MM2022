@@ -1,10 +1,10 @@
-package com.example.MM2022.security;
+package com.example.MM2022.controller;
 
 public class LoginRequest {
-    private String username;
+    private static String username;
     private String password;
 
-    public String getUsername() {
+    public static String getUsername() {
         return username;
     }
 
