@@ -126,7 +126,7 @@ public class MMRepository {
         String sql = "SELECT user_name FROM score_table";
         return jdbcTemplate.queryForList(sql, new HashMap<>(), String.class);
     }
-    //paneb
+
     public void insertToScoreTable(String userName) {
         String sql = "INSERT INTO score_table (user_name, score) " +
                 "VALUES (:name, :score)";
