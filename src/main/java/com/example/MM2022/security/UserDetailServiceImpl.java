@@ -16,7 +16,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        String hashedPassword = passwordEncoder.encode("test");
+        String hashedPassword = passwordEncoder.encode("Ilves");
         return User.withUsername("Veiko")
                 .password(hashedPassword)
                 .roles("USER").build();
