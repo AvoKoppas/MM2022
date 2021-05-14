@@ -11,7 +11,6 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
 
 
-
 import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -98,12 +97,4 @@ public class MMService {
         return mmRepository.gameScoreUser(userName);
     }
 
-//    public boolean validateTime() {
-//        Date currentTime = new Date();
-//        Date kickOff = new Date(mmRepository.getKickOff);
-//        if (currentTime.after(kickOff)) {
-//            return false;
-//        }
-//        return true;
-//    }
 }
