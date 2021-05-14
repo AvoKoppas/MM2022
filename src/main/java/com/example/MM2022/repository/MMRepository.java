@@ -80,9 +80,6 @@ public class MMRepository {
     }
 
     //Võtab ennustustetabelist koduvõistkonna punktiarvu
-
-    
-
     public Integer getPredictionHome(String userName, int gameId) {
 
         String sql = "SELECT home FROM prediction " +
@@ -103,9 +100,6 @@ public class MMRepository {
         return jdbcTemplate.queryForObject(sql, paramMap, Integer.class);
     }
 
-    public void calculateScore() {
-
-    }
 
     //Kuvab välja mängijate ennustustetabeli
     public List<GameScore> gameScore() {
@@ -121,6 +115,7 @@ public class MMRepository {
         paramMap.put("userName", userName);
         return jdbcTemplate.queryForObject(sql, paramMap, Boolean.class);
     }
+
     // võtab edetabelist kõikide kasutajate nimed
     public List<String> getAllUserNames() {
         String sql = "SELECT user_name FROM score_table";
@@ -159,44 +154,4 @@ public class MMRepository {
         return jdbcTemplate.query(sql, paramMap, new GameScoreRowMapper());
     }
 
-//        public List<GameScore> gameScore (String userName,int score){
-
-
-//        public void insertUserAllPrediction (String userName,int gameId, int predictionA, int predictionB){
-//            String sql = "INSERT INTO prediction (user_name, game_id, home, away) " +
-//                    "VALUES (:name, :id, :predA, :predB)";
-//            Map<String, Object> paramMap = new HashMap<>();
-//            paramMap.put("name", userName);
-//            paramMap.put("id", gameId);
-//            paramMap.put("predA", predictionA);
-//            paramMap.put("predB", predictionB);
-//            jdbcTemplate.update(sql, paramMap);
-//        }
-//    }*/
-    //    public int getPrediction(String userName, int gameId) {
-//        String sql = "SELECT home, away FROM prediction " +
-//                "WHERE user_name=:muutuja1, game_id = :gameId";
-//        Map<String, Object> paramMap = new HashMap<>();
-//        paramMap.put("userName", userName);
-//        paramMap.put("gameId", gameId);
-
-//        return jdbcTemplate.queryForObject(sql, paramMap, Integer.class);
-
-//    }
-
-
 }
-    /*public List<GamePrediction> showScore(String userName, int score) {
-
-            String sql = "SELECT f.id f_id, game_nr, f.home f_home, f.away f_away, result," +
-                    "p.id p_id, user_name, p.home p_home, p.away p_away " +
-                    "FROM football_game f JOIN prediction p ON f.id = p.id";
-            Map<String, Object> paramMap = new HashMap<>();
-            paramMap.put("userName", userName);
-            paramMap.put("score", score);
-            return jdbcTemplate.query(sql, paramMap, new GameScoreRowMapper());*/
-
-
-
-
-

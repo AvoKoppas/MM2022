@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RequestMapping("api")
 @RestController
 public class MMController {
     @Autowired
@@ -15,15 +16,6 @@ public class MMController {
 
     @Autowired
     MMService mmService;
-
-    /*@CrossOrigin
-    //http://localhost:8080/createAccount/Veiko/Ilves
-    @PostMapping("createAccount/{userName}/{Password}")
-    public void createAccount(@PathVariable("userName") String userName,
-                                @PathVariable("password") String password) {
-        return mmService.createAccount(userName, password);*/
-
-
 
     @CrossOrigin
     //http://localhost:8080/calculateScore/Veiko/1
@@ -60,8 +52,5 @@ public class MMController {
 
 //    @CrossOrigin
 //    @GetMapping("scoreUserList/{userName}")
-//    public List<GameScore> gameScoreUser(@PathVariable("userName") String userName) {
-//        return mmService.gameScoreUser(userName);
-//    }
 
 }
